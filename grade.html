@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .input-container {
+            margin-bottom: 15px;
+        }
+        
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        
+        .input-container input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Grade Calculator</h2>
+    <div class="input-container">
+        <label for="english">English Marks:</label>
+        <input type="number" id="english" min="0" max="100" required>
+    </div>
+    <div class="input-container">
+        <label for="physics">Physics Marks:</label>
+        <input type="number" id="physics" min="0" max="100" required>
+    </div>
+    <div class="input-container">
+        <label for="chemistry">Chemistry Marks:</label>
+        <input type="number" id="chemistry" min="0" max="100" required>
+    </div>
+    <div class="input-container">
+        <label for="maths">Maths Marks:</label>
+        <input type="number" id="maths" min="0" max="100" required>
+    </div>
+    <div class="input-container">
+        <label for="computerScience">Computer Science Marks:</label>
+        <input type="number" id="computerScience" min="0" max="100" required>
+    </div>
+    <button class="btn" onclick="calculateGrades()">Calculate Grades</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateGrades() {
+        var englishMarks = parseFloat(document.getElementById('english').value);
+        var physicsMarks = parseFloat(document.getElementById('physics').value);
+        var chemistryMarks = parseFloat(document.getElementById('chemistry').value);
+        var mathsMarks = parseFloat(document.getElementById('maths').value);
+        var computerScienceMarks = parseFloat(document.getElementById('computerScience').value);
+        
+        var englishGrade = calculateGrade(englishMarks);
+         var physicsGrade = calculateGrade(physicsMarks);
+        var chemistryGrade = calculateGrade(chemistryMarks);
+        var mathsGrade = calculateGrade(mathsMarks);
+        var computerScienceGrade = calculateGrade(computerScienceMarks);
+        
+        var averageGrade = calculateAverageGrade(englishGrade, physicsGrade, chemistryGrade, mathsGrade, computerScienceGrade);
+        var averagePercentage = calculateAveragePercentage(englishMarks, physicsMarks, chemistryMarks, mathsMarks, computerScienceMarks);
+        
+        var result = "<h3>Subject Grades</h3>";
+        result += "<p>English Grade: " + englishGrade + "</p>";
+        result += "<p>Physics Grade: " + physicsGrade + "</p>";
+        result += "<p>Chemistry Grade: " + chemistryGrade + "</p>";
+        result += "<p>Maths Grade: " + mathsGrade + "</p>";
+        result += "<p>Computer Science Grade: " + computerScienceGrade + "</p>";
+        result += "<h3>Average Grade: " + averageGrade + "</h3>";
+        result += "<h3>Average Percentage: " + averagePercentage.toFixed(2) + "%</h3>";
+        
+        document.getElementById('result').innerHTML = result;
+    }
+    
+    function calculateGrade(marks) {
+        if (marks >= 90) {
+            return 'A';
+        } else if (marks >= 75) {
+            return 'B';
+        } else if (marks >= 60) {
+             return 'C';
+        } else if (marks >= 45) {
+            return 'D';
+        } else if (marks >= 30) {
+            return 'E';
+        } else {
+            return 'F';
+        }
+    }
+    
+    function calculateAverageGrade(englishGrade, physicsGrade, chemistryGrade, mathsGrade, computerScienceGrade) {
+        var totalGrades = 5;
+        var gradeSum = englishGrade.charCodeAt(0) + physicsGrade.charCodeAt(0) + chemistryGrade.charCodeAt(0) + mathsGrade.charCodeAt(0) + computerScienceGrade.charCodeAt(0);
+        return String.fromCharCode(Math.round(gradeSum / totalGrades));
+    }
+    
+    function calculateAveragePercentage(englishMarks, physicsMarks, chemistryMarks, mathsMarks, computerScienceMarks) {
+        var totalMarks = 500;
+        var marksObtained = englishMarks + physicsMarks + chemistryMarks + mathsMarks + computerScienceMarks;
+        return (marksObtained / totalMarks) * 100;
+    }
+</script>
+
+</body>
+</html>
++
